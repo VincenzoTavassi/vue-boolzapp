@@ -1,0 +1,60 @@
+header {
+  height: 20vh;
+  background-color: hsl(174deg 100% 29%);
+}
+
+img {
+  max-width: 100%;
+}
+
+main {
+  height: 80vh;
+  background-color: hsl(90deg 8% 85%);
+}
+
+#root {
+  background-color: white;
+  height: 95vh;
+  width: 80%;
+  position: absolute;
+  top: 20px;
+}
+
+/* SIDE CONTACTS  */
+
+.sidecontacts {
+  background-color: salmon;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.utente {
+  background-color: hsl(0deg 0% 92%);
+  margin: 0 -12px;
+  padding: 10px;
+  border-right: 1px solid lightgray;
+}
+
+.avatar-utente img {
+  width: 50px;
+  border-radius: 50px;
+}
+
+.opzioni-utente {
+  font-size: 1.5rem;
+  color: hsl(0deg 0% 69%);
+}
+
+/* MAIN CHAT  */
+
+.mainchat {
+  background-color: aquamarine;
+  height: 100%;
+  background-image: url(../img/mine.jpg);
+  background-repeat: repeat;
+  overflow-y: scroll;
+}
+
+#root .row {
+  height: 100%;
+}
