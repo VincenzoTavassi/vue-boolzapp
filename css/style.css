@@ -36,13 +36,59 @@ main {
 }
 
 .avatar-utente img {
-  width: 50px;
+  width: 60px;
   border-radius: 50px;
 }
 
 .opzioni-utente {
   font-size: 1.5rem;
   color: hsl(0deg 0% 69%);
+}
+
+.last-access {
+  font-size: 0.8rem;
+  margin-bottom: 0;
+}
+
+.notifiche {
+  background-color: hsl(199deg 95% 77%);
+  padding: 15px;
+}
+
+.notifications-icon {
+  color: hsl(199deg 95% 77%);
+  background-color: white;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+}
+
+/* SEARCH  */
+
+.search {
+  background-color: hsl(0deg 0% 98%);
+}
+
+#search-button {
+  color: gray;
+  background-color: white;
+  border: 1px solid lightgray;
+}
+
+#search-button:hover {
+  background-color: gray;
+  color: white;
+}
+
+/* CONTATTI  */
+
+.contact-timestamp {
+  align-self: flex-start;
+  font-size: 0.9rem;
 }
 
 /* MAIN CHAT  */

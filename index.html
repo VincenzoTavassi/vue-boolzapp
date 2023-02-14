@@ -40,12 +40,19 @@
         <div id="root">
           <div class="row">
             <div class="col-4 sidecontacts">
+              <!-- UTENTE  -->
               <div
                 class="utente d-flex justify-content-between align-items-center"
               >
-                <div class="avatar-utente">
-                  <img src="./img/avatar_io.jpg" alt="Sono proprio io" />
-                  <span>Sofia</span>
+                <div class="avatar-utente d-flex align-items-center">
+                  <img
+                    class="me-2"
+                    src="./img/avatar_io.jpg"
+                    alt="Sono proprio io"
+                  />
+                  <div>
+                    <span>Sofia</span>
+                  </div>
                 </div>
                 <div class="opzioni-utente">
                   <i class="mx-2 fa-solid fa-circle-notch"></i>
@@ -53,14 +60,81 @@
                   <i class="mx-2 fa-solid fa-ellipsis-vertical"></i>
                 </div>
               </div>
-            </div>
-            <div class="col-8 mainchat">
+              <!-- NOTIFICHE  -->
+              <div
+                class="notifiche utente d-flex justify-content-between align-items-center"
+              >
+                <div class="avatar-utente d-flex align-items-center">
+                  <i class="me-2 notifications-icon fa-solid fa-bell-slash"></i>
+                  <div>
+                    <p class="mb-0">Ricevi notifiche di nuovi messaggi</p>
+                    <p class="small text-decoration-underline mb-0">
+                      Attiva notifiche desktop
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- SEARCH BAR  -->
+              <div class="search utente d-flex align-items-center">
+                <div class="input-group mb-0">
+                  <button
+                    class="btn"
+                    id="search-button"
+                    type="button"
+                    id="button-addon1"
+                  >
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                  </button>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Cerca o inizia una nuova chat"
+                    aria-label="Example text with button addon"
+                    aria-describedby="button-addon1"
+                  />
+                </div>
+              </div>
+              <!-- LISTA CONTATTI  -->
               <div
                 class="utente d-flex justify-content-between align-items-center"
               >
-                <div class="avatar-utente">
-                  <img src="./img/avatar_io.jpg" alt="Sono proprio io" />
-                  <span>Sofia</span>
+                <div class="avatar-utente d-flex align-items-center">
+                  <img
+                    class="me-2"
+                    src="./img/avatar_3.jpg"
+                    alt="Un altro utente"
+                  />
+                  <div>
+                    <span>Michele</span>
+                    <p class="text-muted last-access">
+                      Ultimo messaggio inviato
+                    </p>
+                  </div>
+                </div>
+                <div class="contact-timestamp">
+                  <span class="small text-muted">12:00</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- MAIN CHAT PANEL  -->
+            <div class="col-8 mainchat">
+              <!-- UTENTE  -->
+              <div
+                class="utente d-flex justify-content-between align-items-center"
+              >
+                <div class="avatar-utente d-flex align-items-center">
+                  <img
+                    class="me-2"
+                    src="./img/avatar_3.jpg"
+                    alt="Un altro utente"
+                  />
+                  <div>
+                    <span>Michele</span>
+                    <p class="text-muted last-access">
+                      Ultimo accesso oggi alle 12:00
+                    </p>
+                  </div>
                 </div>
                 <div class="opzioni-utente">
                   <i class="mx-2 fa-solid fa-circle-notch"></i>
