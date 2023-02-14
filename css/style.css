@@ -1,3 +1,7 @@
+#root .row {
+  height: 100%;
+}
+
 header {
   height: 20vh;
   background-color: hsl(174deg 100% 29%);
@@ -23,16 +27,22 @@ main {
 /* SIDE CONTACTS  */
 
 .sidecontacts {
-  background-color: salmon;
+  background-color: #fff;
   height: 100%;
-  overflow-y: scroll;
 }
 
+.lista-contatti {
+  overflow-y: scroll;
+  flex-grow: 1;
+}
 .utente {
-  background-color: hsl(0deg 0% 92%);
-  margin: 0 -12px;
   padding: 10px;
+  border: 1px solid hsl(0deg 0% 92%);
   border-right: 1px solid lightgray;
+}
+
+.utente.active {
+  background-color: hsl(0deg 0% 92%);
 }
 
 .avatar-utente img {
@@ -98,9 +108,50 @@ main {
   height: 100%;
   background-image: url(../img/mine.jpg);
   background-repeat: repeat;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
-#root .row {
+.chat-area {
+  overflow-y: scroll;
   height: 100%;
+  padding: 50px;
+}
+
+.message {
+  background-color: hsl(94deg 84% 85%);
+  padding: 10px 0 0 20px;
+  border-radius: 10px;
+  width: fit-content;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.message.received {
+  background-color: #fff;
+  margin-left: 30px;
+}
+
+.message.sent {
+  background-color: hsl(94deg 84% 85%);
+  margin-left: auto;
+  margin-right: 30px;
+}
+
+.message-timestamp {
+  font-size: 0.7rem;
+  align-self: flex-end;
+  padding-right: 10px;
+}
+
+/* INPUT BAR  */
+
+.input-bar {
+  height: 80px;
+  background-color: hsl(27deg 27% 94%);
+  margin-top: auto;
+}
+
+.input-bar .icon {
+  font-size: 2rem;
+  color: gray;
 }
