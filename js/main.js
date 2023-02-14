@@ -168,6 +168,7 @@ createApp({
       ],
       activeUser: 0,
       newMessage: "",
+      searchText: "",
     };
   },
   methods: {
@@ -206,7 +207,22 @@ createApp({
       };
       this.contacts[user].messages.push(rispostaText);
     },
+    cerca(nomeCercato) {
+      if (nomeCercato != "") {
+        const nomeFormattato =
+          nomeCercato[0].toUpperCase() + nomeCercato.slice(1).toLowerCase();
+        this.contacts.forEach((contatto) => {
+          if (!contatto.name.includes(nomeFormattato)) {
+            contatto.visible = false;
+          } else {
+            contatto.visible = true;
+          }
+        });
+      } else {
+        this.contacts.forEach((contatto) => {
+          contatto.visible = true;
+        });
+      }
+    },
   },
 }).mount("#root");
-
-console.log(Vue);

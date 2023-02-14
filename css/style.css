@@ -40,6 +40,7 @@ main {
   border: 1px solid hsl(0deg 0% 92%);
   border-right: 1px solid lightgray;
   cursor: pointer;
+  display: flex;
 }
 
 .utente.active {

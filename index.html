@@ -82,6 +82,7 @@
                     id="search-button"
                     type="button"
                     id="button-addon1"
+                    @keyup.enter="cerca(searchText)"
                   >
                     <i class="fa-solid fa-magnifying-glass"></i>
                   </button>
@@ -91,6 +92,8 @@
                     placeholder="Cerca o inizia una nuova chat"
                     aria-label="Example text with button addon"
                     aria-describedby="button-addon1"
+                    v-model="searchText"
+                    @input="cerca(searchText)"
                   />
                 </div>
               </div>
@@ -98,10 +101,11 @@
               <div class="lista-contatti">
                 <!-- VUE-JS INJECTION  -->
                 <div
-                  class="utente d-flex justify-content-between align-items-center"
+                  class="utente justify-content-between align-items-center"
                   v-for="(contact, numeroUtente) in contacts"
                   :class="activeUser == numeroUtente ? 'active' : ''"
                   @click="activeUser = numeroUtente"
+                  v-show="contact.visible"
                 >
                   <!-- UTENTE  -->
                   <div class="avatar-utente d-flex align-items-center">
