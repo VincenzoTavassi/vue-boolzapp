@@ -166,7 +166,13 @@ createApp({
           ],
         },
       ],
+      activeUser: 0,
     };
+  },
+  methods: {
+    logga(qualcosa) {
+      console.log(qualcosa);
+    },
   },
 }).mount("#root");
 
