@@ -167,11 +167,44 @@ createApp({
         },
       ],
       activeUser: 0,
+      newMessage: "",
     };
   },
   methods: {
     logga(qualcosa) {
       console.log(qualcosa);
+    },
+    addMessage(messaggio, utente) {
+      const currentDate = new Date();
+      const timeStamp =
+        currentDate.getDate() +
+        "/" +
+        (currentDate.getMonth() + 1) +
+        "/" +
+        currentDate.getFullYear() +
+        " " +
+        currentDate.getHours() +
+        ":" +
+        currentDate.getMinutes() +
+        ":" +
+        currentDate.getSeconds();
+
+      const nuovoMessaggio = {
+        date: timeStamp,
+        text: messaggio,
+        status: "sent",
+      };
+      this.contacts[utente].messages.push(nuovoMessaggio);
+      this.newMessage = "";
+      setTimeout(() => this.reply(utente, timeStamp), 1000);
+    },
+    reply(user, time) {
+      const rispostaText = {
+        date: time,
+        text: "OK",
+        status: "received",
+      };
+      this.contacts[user].messages.push(rispostaText);
     },
   },
 }).mount("#root");

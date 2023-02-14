@@ -157,7 +157,9 @@
                   :class="messaggio.status == 'sent' ? 'sent' : 'received'"
                 >
                   <p>{{messaggio.text}}</p>
-                  <span class="message-timestamp small text-muted">15:30</span>
+                  <span class="message-timestamp small text-muted"
+                    >{{messaggio.date}}</span
+                  >
                 </div>
               </div>
               <!-- INPUT BAR  -->
@@ -172,6 +174,8 @@
                     placeholder="Scrivi il tuo messaggio"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-lg"
+                    v-model="newMessage"
+                    @keyup.enter="addMessage(newMessage, activeUser)"
                   />
                 </div>
                 <i class="icon fa-solid fa-microphone"></i>
