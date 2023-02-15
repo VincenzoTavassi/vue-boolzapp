@@ -183,7 +183,7 @@ createApp({
       const parsedTimeStamp = luxon.DateTime.fromFormat(
         timeStamp,
         "dd/L/yyyy, hh:mm:ss"
-      ).toFormat("dd/LL/yyyy hh:mm:ss");
+      ).toFormat("dd/LL/yyyy HH:mm:ss");
       const nuovoMessaggio = {
         date: parsedTimeStamp,
         text: messaggio,
@@ -224,24 +224,24 @@ createApp({
     // FUNZIONE PER FARE IL PARSING DELLE DATE IN FORMATO ACCETTABILE DA LUXON
     timeParseFull(time) {
       const data = {
-        anno: luxon.DateTime.fromFormat(time, "dd/mm/yyyy hh:mm:ss").toFormat(
+        anno: luxon.DateTime.fromFormat(time, "dd/LL/yyyy hh:mm:ss").toFormat(
           "yyyy"
         ),
-        mese: luxon.DateTime.fromFormat(time, "dd/mm/yyyy hh:mm:ss").toFormat(
+        mese: luxon.DateTime.fromFormat(time, "dd/LL/yyyy hh:mm:ss").toFormat(
           "LL"
         ),
-        giorno: luxon.DateTime.fromFormat(time, "dd/mm/yyyy hh:mm:ss").toFormat(
+        giorno: luxon.DateTime.fromFormat(time, "dd/LL/yyyy hh:mm:ss").toFormat(
           "dd"
         ),
-        ore: luxon.DateTime.fromFormat(time, "dd/mm/yyyy hh:mm:ss").toFormat(
+        ore: luxon.DateTime.fromFormat(time, "dd/LL/yyyy hh:mm:ss").toFormat(
           "HH"
         ),
-        minuti: luxon.DateTime.fromFormat(time, "dd/mm/yyyy hh:mm:ss").toFormat(
+        minuti: luxon.DateTime.fromFormat(time, "dd/LL/yyyy hh:mm:ss").toFormat(
           "mm"
         ),
         secondi: luxon.DateTime.fromFormat(
           time,
-          "dd/mm/yyyy hh:mm:ss"
+          "dd/LL/yyyy hh:mm:ss"
         ).toFormat("ss"),
       };
       return data;
