@@ -177,28 +177,21 @@ createApp({
       console.log(qualcosa);
     },
     addMessage(messaggio, utente) {
-      const currentDate = new Date();
-      const timeStamp =
-        currentDate.getDate() +
-        "/" +
-        (currentDate.getMonth() + 1) +
-        "/" +
-        currentDate.getFullYear() +
-        " " +
-        currentDate.getHours() +
-        ":" +
-        currentDate.getMinutes() +
-        ":" +
-        currentDate.getSeconds();
-
+      const timeStamp = luxon.DateTime.now()
+        .setLocale("it")
+        .toLocaleString(luxon.DateTime.DATETIME_SHORT_WITH_SECONDS);
+      const parsedTimeStamp = luxon.DateTime.fromFormat(
+        timeStamp,
+        "dd/L/yyyy, hh:mm:ss"
+      ).toFormat("dd/LL/yyyy hh:mm:ss");
       const nuovoMessaggio = {
-        date: timeStamp,
+        date: parsedTimeStamp,
         text: messaggio,
         status: "sent",
       };
       this.contacts[utente].messages.push(nuovoMessaggio);
       this.newMessage = "";
-      setTimeout(() => this.reply(utente, timeStamp), 1000);
+      setTimeout(() => this.reply(utente, parsedTimeStamp), 1000);
     },
     reply(user, time) {
       const rispostaText = {
