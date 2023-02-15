@@ -28,6 +28,11 @@
     />
     <!-- VUE JS  -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- LUXON DATE AND TIME  -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/luxon@3.2.1/build/global/luxon.min.js"
+      defer
+    ></script>
     <title>Document</title>
     <link rel="stylesheet" href="./css/style.css" />
     <script src="./js/main.js" defer></script>
@@ -122,7 +127,7 @@
                     </div>
                   </div>
                   <div class="contact-timestamp">
-                    <span class="small text-muted">12:00</span>
+                    <span class="small text-muted">12.00</span>
                   </div>
                 </div>
               </div>
@@ -156,14 +161,24 @@
               <!-- CHAT AREA  -->
               <div class="chat-area">
                 <div
-                  v-for="messaggio in contacts[activeUser].messages"
+                  v-for="(messaggio, indice) in contacts[activeUser].messages"
                   class="message d-flex"
-                  :class="messaggio.status == 'sent' ? 'sent' : 'received'"
+                  :class="messaggio.status"
+                  @click="activeMessage = messaggio"
                 >
                   <p>{{messaggio.text}}</p>
                   <span class="message-timestamp small text-muted"
-                    >{{messaggio.date}}</span
+                    >{{ timeParseFull(messaggio.date) }}</span
                   >
+                  <div
+                    class="message-options"
+                    :data-index="indice"
+                    v-show="activeMessage == messaggio"
+                    @click="messaggio = ''"
+                  >
+                    <p @click="deleteMessage(indice)">Delete Message</p>
+                    <p class="mb-0">Message info</p>
+                  </div>
                 </div>
               </div>
               <!-- INPUT BAR  -->

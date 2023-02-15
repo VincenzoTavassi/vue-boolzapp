@@ -169,6 +169,7 @@ createApp({
       activeUser: 0,
       newMessage: "",
       searchText: "",
+      activeMessage: "",
     };
   },
   methods: {
@@ -224,5 +225,18 @@ createApp({
         });
       }
     },
+    deleteMessage(messaggio) {
+      this.contacts[this.activeUser].messages.splice(messaggio, 1);
+    },
+    timeParseFull(time) {
+      return luxon.DateTime.fromFormat(time, "dd/mm/yyyy hh:mm:ss").toFormat(
+        "ff"
+      );
+    },
+    // timeParseHoursOnly(time) {
+    //     return luxon.DateTime.fromFormat(time, "dd/mm/yyyy hh:mm:ss").toFormat()
+    // },
+    findLastMessage() {},
   },
+  created() {},
 }).mount("#root");
