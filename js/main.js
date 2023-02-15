@@ -176,27 +176,62 @@ createApp({
     logga(qualcosa) {
       console.log(qualcosa);
     },
+
+    // AGGIUNGI IL MESSAGGIO
     addMessage(messaggio, utente) {
-      const timeStamp = luxon.DateTime.now()
-        .setLocale("it")
-        .toLocaleString(luxon.DateTime.DATETIME_SHORT_WITH_SECONDS);
-      const parsedTimeStamp = luxon.DateTime.fromFormat(
-        timeStamp,
-        "dd/L/yyyy, hh:mm:ss"
-      ).toFormat("dd/LL/yyyy HH:mm:ss");
-      const nuovoMessaggio = {
-        date: parsedTimeStamp,
-        text: messaggio,
-        status: "sent",
-      };
-      this.contacts[utente].messages.push(nuovoMessaggio);
-      this.newMessage = "";
-      setTimeout(() => this.reply(utente, parsedTimeStamp), 1000);
+      let messaggioValido = false;
+      // controllo che il messaggio abbia più di 1 carattere
+      messaggio.length > 1 ? (messaggioValido = true) : "";
+      // il messaggio non deve contenere solo spazi
+      for (let i = 0; i < messaggio.length; i++) {
+        const letter = messaggio[i];
+        if (letter != " ") {
+          messaggioValido = true;
+        } else {
+          messaggioValido = false;
+        }
+      }
+
+      if (messaggioValido == true) {
+        const timeStamp = luxon.DateTime.now()
+          .setLocale("it")
+          .toLocaleString(luxon.DateTime.DATETIME_SHORT_WITH_SECONDS);
+        const parsedTimeStamp = luxon.DateTime.fromFormat(
+          timeStamp,
+          "dd/L/yyyy, hh:mm:ss"
+        ).toFormat("dd/LL/yyyy HH:mm:ss");
+        const nuovoMessaggio = {
+          date: parsedTimeStamp,
+          text: messaggio,
+          status: "sent",
+        };
+        this.contacts[utente].messages.push(nuovoMessaggio);
+        this.newMessage = "";
+        setTimeout(() => this.reply(utente, parsedTimeStamp), 1000);
+      }
     },
+
+    // RISPOSTA AUTOMATICA ALL'UTENTE
     reply(user, time) {
+      const risposte = [
+        "Neppure i più saggi conoscono le conseguenze!",
+        "They're taking the hobbits to Isengard!",
+        "Dov'era Gondor?!",
+        "Tu non puoi passare!",
+        "Ritorna nell'ombra!",
+        "Fuggite, sciocchi!",
+        "VINOH!!!",
+        "Case di paglia, che bevono paglia.",
+        "Lupo ululà, castello ululì!",
+        "E' finito il vino.",
+        "Allora va'.. e riempilo!",
+        "Sire, non c'è più vino",
+      ];
+      let numeroRisposta = Math.floor(Math.random() * risposte.length);
+
       const rispostaText = {
         date: time,
-        text: "OK",
+        text: risposte[numeroRisposta],
         status: "received",
       };
       this.contacts[user].messages.push(rispostaText);
