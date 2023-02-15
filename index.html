@@ -122,12 +122,18 @@
                     <div>
                       <span>{{ contact.name }}</span>
                       <p class="text-muted last-access">
-                        Ultimo messaggio inviato
+                        Ultimo messaggio inviato il {{
+                        getLastMessage(contact).giorno + '/' +
+                        getLastMessage(contact).mese + '/' +
+                        getLastMessage(contact).anno }}
                       </p>
                     </div>
                   </div>
                   <div class="contact-timestamp">
-                    <span class="small text-muted">12.00</span>
+                    <span class="small text-muted">
+                      {{getLastMessage(contact).ore + ':' +
+                      getLastMessage(contact).minuti }}</span
+                    >
                   </div>
                 </div>
               </div>
@@ -148,7 +154,12 @@
                   <div>
                     <span>{{ contacts[activeUser].name }}</span>
                     <p class="text-muted last-access">
-                      Ultimo accesso oggi alle 12:00
+                      Ultimo accesso il
+                      {{getLastMessage(contacts[activeUser]).giorno + '/' +
+                      getLastMessage(contacts[activeUser]).mese + '/' +
+                      getLastMessage(contacts[activeUser]).anno + ' alle ' +
+                      getLastMessage(contacts[activeUser]).ore + ':' +
+                      getLastMessage(contacts[activeUser]).minuti}}
                     </p>
                   </div>
                 </div>
@@ -168,11 +179,11 @@
                 >
                   <p>{{messaggio.text}}</p>
                   <span class="message-timestamp small text-muted"
-                    >{{ timeParseFull(messaggio.date) }}</span
+                    >{{ timeParseFull(messaggio.date).ore + ':' +
+                    timeParseFull(messaggio.date).minuti}}</span
                   >
                   <div
                     class="message-options"
-                    :data-index="indice"
                     v-show="activeMessage == messaggio"
                     @click="messaggio = ''"
                   >

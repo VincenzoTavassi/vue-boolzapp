@@ -228,15 +228,64 @@ createApp({
     deleteMessage(messaggio) {
       this.contacts[this.activeUser].messages.splice(messaggio, 1);
     },
+    // FUNZIONE PER FARE IL PARSING DELLE DATE IN FORMATO ACCETTABILE DA LUXON
     timeParseFull(time) {
-      return luxon.DateTime.fromFormat(time, "dd/mm/yyyy hh:mm:ss").toFormat(
-        "ff"
-      );
+      const data = {
+        anno: luxon.DateTime.fromFormat(time, "dd/mm/yyyy hh:mm:ss").toFormat(
+          "yyyy"
+        ),
+        mese: luxon.DateTime.fromFormat(time, "dd/mm/yyyy hh:mm:ss").toFormat(
+          "LL"
+        ),
+        giorno: luxon.DateTime.fromFormat(time, "dd/mm/yyyy hh:mm:ss").toFormat(
+          "dd"
+        ),
+        ore: luxon.DateTime.fromFormat(time, "dd/mm/yyyy hh:mm:ss").toFormat(
+          "HH"
+        ),
+        minuti: luxon.DateTime.fromFormat(time, "dd/mm/yyyy hh:mm:ss").toFormat(
+          "mm"
+        ),
+        secondi: luxon.DateTime.fromFormat(
+          time,
+          "dd/mm/yyyy hh:mm:ss"
+        ).toFormat("ss"),
+      };
+      return data;
     },
-    // timeParseHoursOnly(time) {
-    //     return luxon.DateTime.fromFormat(time, "dd/mm/yyyy hh:mm:ss").toFormat()
-    // },
-    findLastMessage() {},
+    getLastMessage(utente) {
+      let lastMessage;
+      let lastInterval = 0;
+      // CICLO MESSAGGI
+      utente.messages.forEach((messaggio) => {
+        // CONVERTO DATA MESSAGGI IN DATA UTILE PER IL CONFRONTO
+        let dataMessaggio = this.timeParseFull(messaggio.date);
+        let dataMessaggioFormattata = luxon.DateTime.local(
+          parseInt(dataMessaggio.anno),
+          parseInt(dataMessaggio.mese),
+          parseInt(dataMessaggio.giorno),
+          parseInt(dataMessaggio.ore),
+          parseInt(dataMessaggio.minuti),
+          parseInt(dataMessaggio.secondi)
+        );
+        let dataOdierna = luxon.DateTime.now();
+        // VERIFICO L'INTERVALLO TRA LE DUE DATE IN MS
+        const differenzaDate = luxon.Interval.fromDateTimes(
+          dataMessaggioFormattata,
+          dataOdierna
+        ).length("milliseconds");
+        // SE LA DIFFERENZA E' MAGGIORE, AGGIORNA SOLO IL LASTINTERVAL
+        if (differenzaDate > lastInterval) {
+          lastInterval = differenzaDate;
+        } else {
+          // ALTRIMENTI RECUPERA ANCHE IL MESSAGGIO
+          lastInterval = differenzaDate;
+          lastMessage = messaggio;
+        }
+      });
+      // RITORNA L'OGGETTO DATA DELL'ULTIMO MESSAGGIO
+      return this.timeParseFull(lastMessage.date);
+    },
   },
   created() {},
 }).mount("#root");
