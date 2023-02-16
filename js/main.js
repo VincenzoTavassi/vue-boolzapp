@@ -109,6 +109,7 @@ createApp({
     deleteAllMessages() {
       this.contacts[this.activeUser].messages = [];
     },
+    // CANCELLA UN CONTATTO
     deleteContact() {
       this.contacts.splice(this.activeUser, 1);
     },
@@ -175,6 +176,20 @@ createApp({
         return this.timeParseFull(lastMessage.date);
       }
     },
+    loadEmoji() {
+      new EmojiPicker({
+        trigger: [
+          {
+            selector: ".fa-face-smile",
+            insertInto: [".chat-bar"], // '.selector' can be used without array
+          },
+        ],
+        closeButton: true,
+        //specialButtons: green
+      });
+    },
   },
-  created() {},
+  created() {
+    this.loadEmoji();
+  },
 }).mount("#root");
