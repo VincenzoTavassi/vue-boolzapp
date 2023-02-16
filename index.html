@@ -27,7 +27,9 @@
       referrerpolicy="no-referrer"
     />
     <!-- VUE JS  -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.47/vue.cjs.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.global.min.js"></script>
     <!-- LUXON DATE AND TIME  -->
     <script
       src="https://cdn.jsdelivr.net/npm/luxon@3.2.1/build/global/luxon.min.js"
@@ -35,6 +37,7 @@
     ></script>
     <title>Document</title>
     <link rel="stylesheet" href="./css/style.css" />
+    <script src="./js/data.js" defer></script>
     <script src="./js/main.js" defer></script>
   </head>
 
@@ -122,16 +125,17 @@
                     <div>
                       <span>{{ contact.name }}</span>
                       <p class="text-muted last-access">
-                        Ultimo messaggio inviato il {{
-                        getLastMessage(contact).giorno + '/' +
-                        getLastMessage(contact).mese + '/' +
-                        getLastMessage(contact).anno }}
+                        {{ (contact.messages[contact.messages.length -1]).text
+                        }}
                       </p>
                     </div>
                   </div>
                   <div class="contact-timestamp">
-                    <span class="small text-muted">
-                      {{getLastMessage(contact).ore + ':' +
+                    <span class="small text-muted"
+                      >{{ getLastMessage(contact).giorno + '/' +
+                      getLastMessage(contact).mese + '/' +
+                      getLastMessage(contact).anno + ' alle ' +
+                      getLastMessage(contact).ore + ':' +
                       getLastMessage(contact).minuti }}</span
                     >
                   </div>
@@ -153,13 +157,25 @@
                   />
                   <div>
                     <span>{{ contacts[activeUser].name }}</span>
-                    <p class="text-muted last-access">
+                    <p v-if="!pcTyping" class="text-muted last-access">
                       Ultimo accesso il
                       {{getLastMessage(contacts[activeUser]).giorno + '/' +
                       getLastMessage(contacts[activeUser]).mese + '/' +
                       getLastMessage(contacts[activeUser]).anno + ' alle ' +
                       getLastMessage(contacts[activeUser]).ore + ':' +
                       getLastMessage(contacts[activeUser]).minuti}}
+                    </p>
+                    <p
+                      v-if="pcTyping == 'writing'"
+                      class="text-muted last-access"
+                    >
+                      Sta scrivendo...
+                    </p>
+                    <p
+                      v-if="pcTyping == 'online'"
+                      class="text-muted last-access"
+                    >
+                      Online
                     </p>
                   </div>
                 </div>
@@ -202,13 +218,20 @@
                     type="text"
                     class="form-control"
                     placeholder="Scrivi il tuo messaggio"
-                    aria-label="Sizing example input"
+                    aria-label="Scrivi il tuo messaggio"
                     aria-describedby="inputGroup-sizing-lg"
                     v-model="newMessage"
-                    @keyup.enter="addMessage(newMessage, activeUser)"
+                    @keyup.enter="addMessage(newMessage, activeUser); userTyping = false"
+                    @input="userTyping = true"
                   />
                 </div>
-                <i class="icon fa-solid fa-microphone"></i>
+                <i v-show="!userTyping" class="icon fa-solid fa-microphone"></i>
+                <a href="#" v-show="userTyping"
+                  ><i
+                    class="icon fa-solid fa-paper-plane"
+                    @click="addMessage(newMessage, activeUser); userTyping = false"
+                  ></i
+                ></a>
               </div>
             </div>
           </div>
