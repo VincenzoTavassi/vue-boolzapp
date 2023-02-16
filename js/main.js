@@ -101,12 +101,17 @@ createApp({
     },
     // CANCELLA MESSAGGIO
     deleteMessage(messaggio) {
-      this.contacts[this.activeUser].messages.splice(messaggio, 1);
+      if (this.contacts[this.activeUser].messages.length > 0) {
+        this.contacts[this.activeUser].messages.splice(messaggio, 1);
+      }
     },
     // CANCELLA TUTTI I MESSAGGI DELLA CHAT
-    // deleteAllMessages() {
-    //   this.contacts[this.activeUser].messages = [];
-    // },
+    deleteAllMessages() {
+      this.contacts[this.activeUser].messages = [];
+    },
+    deleteContact() {
+      this.contacts.splice(this.activeUser, 1);
+    },
     // FUNZIONE PER FARE IL PARSING DELLE DATE IN FORMATO ACCETTABILE DA LUXON
     timeParseFull(time) {
       const data = {
@@ -135,37 +140,40 @@ createApp({
 
     // OTTIENE LA DATA DELL'ULTIMO MESSAGGIO
     getLastMessage(utente) {
-      let lastMessage;
-      let lastInterval = 0;
-      // CICLO MESSAGGI
-      utente.messages.forEach((messaggio) => {
-        // CONVERTO DATA MESSAGGI IN DATA UTILE PER IL CONFRONTO
-        let dataMessaggio = this.timeParseFull(messaggio.date);
-        let dataMessaggioFormattata = luxon.DateTime.local(
-          parseInt(dataMessaggio.anno),
-          parseInt(dataMessaggio.mese),
-          parseInt(dataMessaggio.giorno),
-          parseInt(dataMessaggio.ore),
-          parseInt(dataMessaggio.minuti),
-          parseInt(dataMessaggio.secondi)
-        );
-        let dataOdierna = luxon.DateTime.now();
-        // VERIFICO L'INTERVALLO TRA LE DUE DATE IN MS
-        const differenzaDate = luxon.Interval.fromDateTimes(
-          dataMessaggioFormattata,
-          dataOdierna
-        ).length("milliseconds");
-        // SE LA DIFFERENZA E' MAGGIORE, AGGIORNA SOLO IL LASTINTERVAL
-        if (differenzaDate > lastInterval) {
-          lastInterval = differenzaDate;
-        } else {
-          // ALTRIMENTI RECUPERA ANCHE IL MESSAGGIO
-          lastInterval = differenzaDate;
-          lastMessage = messaggio;
-        }
-      });
-      // RITORNA L'OGGETTO DATA DELL'ULTIMO MESSAGGIO
-      return this.timeParseFull(lastMessage.date);
+      if (utente.messages.length > 0) {
+        let lastMessage;
+        let lastInterval = 0;
+        // CICLO MESSAGGI
+        utente.messages.forEach((messaggio) => {
+          // CONVERTO DATA MESSAGGI IN DATA UTILE PER IL CONFRONTO
+          let dataMessaggio = this.timeParseFull(messaggio.date);
+          let dataMessaggioFormattata = luxon.DateTime.local(
+            parseInt(dataMessaggio.anno),
+            parseInt(dataMessaggio.mese),
+            parseInt(dataMessaggio.giorno),
+            parseInt(dataMessaggio.ore),
+            parseInt(dataMessaggio.minuti),
+            parseInt(dataMessaggio.secondi)
+          );
+          let dataOdierna = luxon.DateTime.now();
+          // VERIFICO L'INTERVALLO TRA LE DUE DATE IN MS
+          const differenzaDate = luxon.Interval.fromDateTimes(
+            dataMessaggioFormattata,
+            dataOdierna // 1000
+          ).length("milliseconds");
+          // SE LA DIFFERENZA E' MAGGIORE, AGGIORNA SOLO IL LASTINTERVAL
+          if (differenzaDate < lastInterval) {
+            lastInterval = differenzaDate;
+            lastMessage = messaggio;
+          } else {
+            // ALTRIMENTI RECUPERA ANCHE IL MESSAGGIO
+            lastInterval = differenzaDate;
+            lastMessage = messaggio;
+          }
+        });
+        // RITORNA L'OGGETTO DATA DELL'ULTIMO MESSAGGIO
+        return this.timeParseFull(lastMessage.date);
+      }
     },
   },
   created() {},

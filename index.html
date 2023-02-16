@@ -124,13 +124,19 @@
                     />
                     <div>
                       <span>{{ contact.name }}</span>
-                      <p class="text-muted last-access">
+                      <p
+                        v-if="contact.messages.length > 0"
+                        class="text-muted last-access"
+                      >
                         {{ (contact.messages[contact.messages.length -1]).text
                         }}
                       </p>
                     </div>
                   </div>
-                  <div class="contact-timestamp">
+                  <div
+                    class="contact-timestamp"
+                    v-if="contact.messages.length > 0"
+                  >
                     <span class="small text-muted"
                       >{{ getLastMessage(contact).giorno + '/' +
                       getLastMessage(contact).mese + '/' +
@@ -157,7 +163,10 @@
                   />
                   <div>
                     <span>{{ contacts[activeUser].name }}</span>
-                    <p v-if="!pcTyping" class="text-muted last-access">
+                    <p
+                      v-if="!pcTyping && contacts[activeUser].messages.length > 0"
+                      class="text-muted last-access"
+                    >
                       Ultimo accesso il
                       {{getLastMessage(contacts[activeUser]).giorno + '/' +
                       getLastMessage(contacts[activeUser]).mese + '/' +
@@ -191,8 +200,10 @@
                     class="chat-options fs-5"
                     @click="chatOptions = false"
                   >
-                    <p>Cancella Messaggi</p>
-                    <p class="mb-0">Message info</p>
+                    <p @click="deleteAllMessages()">Cancella Messaggi</p>
+                    <p @click="deleteContact()" class="mb-0">
+                      Cancella contatto
+                    </p>
                   </div>
                 </div>
               </div>
