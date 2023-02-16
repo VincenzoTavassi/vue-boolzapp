@@ -11,13 +11,25 @@ createApp({
       userTyping: false,
       pcTyping: false,
       chatOptions: false,
+      userOptions: false,
+      newUserAvatar: "",
+      newUserName: "",
     };
   },
   methods: {
     logga(qualcosa) {
       console.log(qualcosa);
     },
-
+    // AGGIUNGI CONVERSAZIONE
+    addChat(name, avatar) {
+      const nuovaChat = {
+        name,
+        avatar,
+        visible: true,
+        messages: [],
+      };
+      this.contacts.push(nuovaChat);
+    },
     // AGGIUNGI IL MESSAGGIO
     addMessage(messaggio, utente) {
       let messaggioValido = false;

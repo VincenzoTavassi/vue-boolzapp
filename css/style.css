@@ -163,7 +163,7 @@ main {
   position: absolute;
   top: 50%;
   right: 25%;
-  width: 200px;
+  width: fit-content;
   background-color: white;
   border: 1px solid lightgray;
   padding: 10px;

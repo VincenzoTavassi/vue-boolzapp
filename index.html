@@ -64,9 +64,27 @@
                     <span>Sofia</span>
                   </div>
                 </div>
-                <div class="opzioni-utente">
+                <div class="opzioni-utente position-relative">
                   <i class="mx-2 fa-solid fa-circle-notch"></i>
-                  <i class="mx-2 fa-solid fa-message"></i>
+                  <i
+                    @click="userOptions = true"
+                    class="mx-2 fa-solid fa-message"
+                  ></i>
+
+                  <div
+                    v-show="userOptions"
+                    class="chat-options fs-5"
+                    @mouseleave="userOptions = false"
+                  >
+                    Nome: <input type="text" v-model="newUsername" /><br />
+                    Avatar: <input type="text" v-model="newUserAvatar" />
+                    <button
+                      type="button"
+                      @click="addChat(newUsername, newUserAvatar)"
+                    >
+                      Send
+                    </button>
+                  </div>
                   <i class="mx-2 fa-solid fa-ellipsis-vertical"></i>
                 </div>
               </div>
@@ -204,7 +222,7 @@
                   >
                     <p @click="deleteAllMessages()">Cancella Messaggi</p>
                     <p @click="deleteContact()" class="mb-0">
-                      Cancella contatto
+                      Cancella Contatto
                     </p>
                   </div>
                 </div>
