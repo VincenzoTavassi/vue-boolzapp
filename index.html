@@ -179,10 +179,21 @@
                     </p>
                   </div>
                 </div>
-                <div class="opzioni-utente">
+                <div class="opzioni-utente position-relative">
                   <i class="mx-2 fa-solid fa-magnifying-glass"></i>
                   <i class="mx-2 fa-solid fa-paperclip"></i>
-                  <i class="mx-2 fa-solid fa-ellipsis-vertical"></i>
+                  <i
+                    @click="chatOptions = !chatOptions"
+                    class="mx-2 fa-solid fa-ellipsis-vertical"
+                  ></i>
+                  <div
+                    v-show="chatOptions"
+                    class="chat-options fs-5"
+                    @click="chatOptions = false"
+                  >
+                    <p>Cancella Messaggi</p>
+                    <p class="mb-0">Message info</p>
+                  </div>
                 </div>
               </div>
               <!-- CHAT AREA  -->

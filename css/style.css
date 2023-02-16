@@ -159,6 +159,18 @@ main {
   cursor: pointer;
 }
 
+.chat-options {
+  position: absolute;
+  top: 50%;
+  right: 25%;
+  width: 200px;
+  background-color: white;
+  border: 1px solid lightgray;
+  padding: 10px;
+  z-index: 1;
+  cursor: pointer;
+}
+
 /* INPUT BAR  */
 
 .input-bar {

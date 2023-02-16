@@ -10,6 +10,7 @@ createApp({
       activeMessage: "",
       userTyping: false,
       pcTyping: false,
+      chatOptions: false,
     };
   },
   methods: {
@@ -102,6 +103,10 @@ createApp({
     deleteMessage(messaggio) {
       this.contacts[this.activeUser].messages.splice(messaggio, 1);
     },
+    // CANCELLA TUTTI I MESSAGGI DELLA CHAT
+    // deleteAllMessages() {
+    //   this.contacts[this.activeUser].messages = [];
+    // },
     // FUNZIONE PER FARE IL PARSING DELLE DATE IN FORMATO ACCETTABILE DA LUXON
     timeParseFull(time) {
       const data = {
