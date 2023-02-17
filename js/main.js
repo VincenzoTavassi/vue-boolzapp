@@ -123,7 +123,9 @@ createApp({
     },
     // CANCELLA UN CONTATTO
     deleteContact() {
-      this.contacts.splice(this.activeUser, 1);
+      if (this.contacts.length > 0) {
+        this.contacts.splice(this.activeUser, 1);
+      }
     },
     // FUNZIONE PER FARE IL PARSING DELLE DATE IN FORMATO ACCETTABILE DA LUXON
     timeParseFull(time) {
