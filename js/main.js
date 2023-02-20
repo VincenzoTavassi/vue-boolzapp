@@ -13,7 +13,7 @@ createApp({
       chatOptions: false,
       userOptions: false,
       newUserAvatar: "",
-      newUserName: "",
+      newUsername: "",
     };
   },
   methods: {
@@ -65,6 +65,11 @@ createApp({
           this.pcTyping = "online";
           setTimeout(() => (this.pcTyping = false), 2000);
         }, 1000);
+        // SCROLL DOWN AUTOMATICO this.$nextTick si usa per attendere l'aggiornamento del DOM prima di effettuare un'altra azione
+        this.$nextTick(() => {
+          const chatArea = this.$refs.chatarea;
+          chatArea.scrollTo(0, chatArea.scrollHeight);
+        });
       }
     },
 
@@ -92,6 +97,11 @@ createApp({
         status: "received",
       };
       this.contacts[user].messages.push(rispostaText);
+      // SCROLL DOWN AUTOMATICO
+      this.$nextTick(() => {
+        const chatArea = this.$refs.chatarea;
+        chatArea.scrollTo(0, chatArea.scrollHeight);
+      });
     },
     // CERCA UTENTE
     cerca(nomeCercato) {

@@ -81,7 +81,7 @@
                     <input
                       type="text"
                       v-model="newUserAvatar"
-                      @keyup.enter="addChat('Mario', '_3'); newUsername = '';
+                      @keyup.enter="addChat(newUsername, newUserAvatar); newUsername = '';
       newUserAvatar = ''"
                     />
                     <button
@@ -235,7 +235,11 @@
                 </div>
               </div>
               <!-- CHAT AREA  -->
-              <div v-if="activeUser < contacts.length" class="chat-area">
+              <div
+                ref="chatarea"
+                v-if="activeUser < contacts.length"
+                class="chat-area"
+              >
                 <div
                   v-for="(messaggio, indice) in contacts[activeUser].messages"
                   class="message d-flex"
